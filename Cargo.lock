@@ -2152,9 +2152,9 @@ dependencies = [
  "paste",
  "serde",
  "serde_json",
- "sqlx-core",
- "sqlx-macros",
- "sqlx-rt",
+ "sqlx-core 0.4.0 (git+https://github.com/nkconnor/sqlx)",
+ "sqlx-macros 0.4.0 (git+https://github.com/nkconnor/sqlx)",
+ "sqlx-rt 0.2.0",
  "sqlx-test",
  "time 0.2.22",
  "tokio",
@@ -2170,7 +2170,7 @@ dependencies = [
  "dotenv",
  "once_cell",
  "sqlx",
- "sqlx-rt",
+ "sqlx-rt 0.2.0",
 ]
 
 [[package]]
@@ -2245,7 +2245,68 @@ dependencies = [
  "sha2",
  "smallvec",
  "sqlformat",
- "sqlx-rt",
+ "sqlx-rt 0.2.0",
+ "stringprep",
+ "thiserror",
+ "time 0.2.22",
+ "url",
+ "uuid",
+ "webpki",
+ "webpki-roots",
+ "whoami",
+]
+
+[[package]]
+name = "sqlx-core"
+version = "0.4.0"
+source = "git+https://github.com/nkconnor/sqlx#5ddc3b894e667be6cea85accc259f30383d03c31"
+dependencies = [
+ "ahash",
+ "atoi",
+ "base64 0.13.0",
+ "bigdecimal",
+ "bit-vec",
+ "bitflags",
+ "byteorder",
+ "bytes",
+ "chrono",
+ "crc",
+ "crossbeam-channel 0.4.4",
+ "crossbeam-queue",
+ "crossbeam-utils 0.7.2",
+ "digest",
+ "either",
+ "encoding_rs",
+ "futures-channel",
+ "futures-core",
+ "futures-util",
+ "generic-array",
+ "hex",
+ "hmac",
+ "ipnetwork",
+ "itoa",
+ "libc",
+ "libsqlite3-sys",
+ "log",
+ "lru-cache",
+ "md-5",
+ "memchr",
+ "num-bigint 0.3.1",
+ "once_cell",
+ "parking_lot",
+ "percent-encoding",
+ "rand",
+ "regex",
+ "rsa",
+ "rust_decimal",
+ "rustls",
+ "serde",
+ "serde_json",
+ "sha-1",
+ "sha2",
+ "smallvec",
+ "sqlformat",
+ "sqlx-rt 0.2.0 (git+https://github.com/nkconnor/sqlx)",
  "stringprep",
  "thiserror",
  "time 0.2.22",
@@ -2316,8 +2377,29 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
- "sqlx-core",
- "sqlx-rt",
+ "sqlx-core 0.4.0",
+ "sqlx-rt 0.2.0",
+ "syn",
+ "url",
+]
+
+[[package]]
+name = "sqlx-macros"
+version = "0.4.0"
+source = "git+https://github.com/nkconnor/sqlx#5ddc3b894e667be6cea85accc259f30383d03c31"
+dependencies = [
+ "dotenv",
+ "either",
+ "futures",
+ "heck",
+ "hex",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "serde_json",
+ "sha2",
+ "sqlx-core 0.4.0 (git+https://github.com/nkconnor/sqlx)",
+ "sqlx-rt 0.2.0 (git+https://github.com/nkconnor/sqlx)",
  "syn",
  "url",
 ]
@@ -2325,6 +2407,23 @@ dependencies = [
 [[package]]
 name = "sqlx-rt"
 version = "0.2.0"
+dependencies = [
+ "actix-rt",
+ "actix-threadpool",
+ "async-native-tls",
+ "async-rustls",
+ "async-std",
+ "native-tls",
+ "once_cell",
+ "tokio",
+ "tokio-native-tls",
+ "tokio-rustls",
+]
+
+[[package]]
+name = "sqlx-rt"
+version = "0.2.0"
+source = "git+https://github.com/nkconnor/sqlx#5ddc3b894e667be6cea85accc259f30383d03c31"
 dependencies = [
  "actix-rt",
  "actix-threadpool",
