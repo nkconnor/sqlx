@@ -86,7 +86,7 @@ fn expand_from_db(input: QueryMacroInput, db_url: &str) -> crate::Result<TokenSt
         },
 
         #[cfg(not(feature = "postgres"))]
-        "postgres" | "postgresql" => Err(format!("database URL has the scheme of a PostgreSQL database but the `postgres` feature is not enabled").into()),
+        "postgres" | "postgresql" => Err("database URL has the scheme of a PostgreSQL database but the `postgres` feature is not enabled".into()),
 
         #[cfg(feature = "mssql")]
         "mssql" | "sqlserver" => {
@@ -99,7 +99,7 @@ fn expand_from_db(input: QueryMacroInput, db_url: &str) -> crate::Result<TokenSt
         },
 
         #[cfg(not(feature = "mssql"))]
-        "mssql" | "sqlserver" => Err(format!("database URL has the scheme of a MSSQL database but the `mssql` feature is not enabled").into()),
+        "mssql" | "sqlserver" => Err("database URL has the scheme of a MSSQL database but the `mssql` feature is not enabled".into()),
 
         #[cfg(feature = "mysql")]
         "mysql" | "mariadb" => {
@@ -112,7 +112,7 @@ fn expand_from_db(input: QueryMacroInput, db_url: &str) -> crate::Result<TokenSt
         },
 
         #[cfg(not(feature = "mysql"))]
-        "mysql" | "mariadb" => Err(format!("database URL has the scheme of a MySQL/MariaDB database but the `mysql` feature is not enabled").into()),
+        "mysql" | "mariadb" => Err("database URL has the scheme of a MySQL/MariaDB database but the `mysql` feature is not enabled".into()),
 
         #[cfg(feature = "sqlite")]
         "sqlite" => {
@@ -125,7 +125,7 @@ fn expand_from_db(input: QueryMacroInput, db_url: &str) -> crate::Result<TokenSt
         },
 
         #[cfg(not(feature = "sqlite"))]
-        "sqlite" => Err(format!("database URL has the scheme of a SQLite database but the `sqlite` feature is not enabled").into()),
+        "sqlite" => Err("database URL has the scheme of a SQLite database but the `sqlite` feature is not enabled".into()),
 
         scheme => Err(format!("unknown database URL scheme {:?}", scheme).into())
     }
@@ -271,13 +271,18 @@ where
         record_tokens
     };
 
-    let ret_tokens = quote! {{
-        use sqlx::Arguments as _;
+    let ret_tokens = quote! {
+        {
+            #[allow(clippy::all)]
+            {
+                use sqlx::Arguments as _;
 
-        #args_tokens
+                #args_tokens
 
-        #output
-    }};
+                #output
+            }
+        }
+    };
 
     // Store query metadata only if offline support is enabled but the current build is online.
     // If the build is offline, the cache is our input so it's pointless to also write data for it.
